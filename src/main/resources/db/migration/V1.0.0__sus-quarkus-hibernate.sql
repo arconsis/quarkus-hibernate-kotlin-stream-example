@@ -1,0 +1,41 @@
+
+    create table authors (
+        id uuid not null,
+        birthdate date,
+        name varchar(255),
+        primary key (id)
+    );
+
+    create table book_authors (
+        books_id uuid not null,
+        authors_id uuid not null,
+        primary key (books_id, authors_id)
+    );
+
+    create table books (
+        id uuid not null,
+        title varchar(255),
+        primary key (id)
+    );
+
+    alter table if exists book_authors 
+       add constraint FKmrh1ngrk6uv6gc4jpousf5d6n 
+       foreign key (authors_id) 
+       references authors;
+
+    alter table if exists book_authors 
+       add constraint FKjecbdnbx8a1woip1ouidrd6gf 
+       foreign key (books_id) 
+       references books;
+
+
+INSERT INTO books (id, title) VALUES ('17a60aa5-c08d-4f5b-8b59-705a1ae6fd2c', 'Dune');
+INSERT INTO books (id, title) VALUES ('940d048e-dd3b-4ec1-a2e8-ddc896ec9949', 'Java Persistence with Hibernate, Second Edition');
+INSERT INTO authors(id, name, birthdate) VALUES ('54be0c28-eb04-4a38-90ca-eae83a541424', 'Frank Herbert', '1920-10-08');
+INSERT INTO authors(id, name) VALUES ('4a9af4c2-a1a7-49a5-8221-a51a77644e36', 'Christian Bauer');
+INSERT INTO authors(id, name) VALUES ('ca963e56-b5fb-4a32-b2d4-48486310fa87', 'Gavin King');
+INSERT INTO authors(id, name) VALUES ('08d52416-30b3-4296-91d4-7df3d944c134', 'Gary Gregory');
+INSERT INTO book_authors(books_id, authors_id) VALUES ('17a60aa5-c08d-4f5b-8b59-705a1ae6fd2c', '54be0c28-eb04-4a38-90ca-eae83a541424');
+INSERT INTO book_authors(books_id, authors_id) VALUES ('940d048e-dd3b-4ec1-a2e8-ddc896ec9949', '4a9af4c2-a1a7-49a5-8221-a51a77644e36');
+INSERT INTO book_authors(books_id, authors_id) VALUES ('940d048e-dd3b-4ec1-a2e8-ddc896ec9949', 'ca963e56-b5fb-4a32-b2d4-48486310fa87');
+INSERT INTO book_authors(books_id, authors_id) VALUES ('940d048e-dd3b-4ec1-a2e8-ddc896ec9949', '08d52416-30b3-4296-91d4-7df3d944c134');
